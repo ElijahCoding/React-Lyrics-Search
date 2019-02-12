@@ -11,7 +11,7 @@ class Search extends Component {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    findTrack = (e) => {
+    findTrack = (dispatch, e) => {
         e.preventDefault()
 
         axios.get(
@@ -21,7 +21,12 @@ class Search extends Component {
                 process.env.REACT_APP_MM_KEY
             }`
         ).then(response => {
+            dispatch({
+                type: 'SEARCH_TRACKS',
+                payload: response.data.message.body.track_list
+            })
 
+            this.setState({ trackTitle: '' })
         }).catch(err => {
             console.log(err)
         })
@@ -31,6 +36,7 @@ class Search extends Component {
         return (
             <Consumer>
                 {value => {
+                    const { dispatch } = value
                     return (
                         <div className="card card-body mb-4 p-4">
                             <h1 className="display-4 text-center">
@@ -38,7 +44,7 @@ class Search extends Component {
                             </h1>
                             <p className="lead text-center">Get the lyrics for any song</p>
 
-                            <form onSubmit={this.findTrack}>
+                            <form onSubmit={this.findTrack.bind(this, dispatch)}>
                                 <div className="form-group">
                                     <input  type="text"
                                             className="form-control form-control-lg"
