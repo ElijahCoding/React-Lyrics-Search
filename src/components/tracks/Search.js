@@ -3,8 +3,12 @@ import axios from 'axios'
 import { Consumer } from '../../context'
 
 class Search extends Component {
-    state: {
+    state = {
         trackTitle: ''
+    }
+
+    onChange (e) {
+        this.setState({ [e.target.name]: e.target.value })
     }
 
     render() {
@@ -24,10 +28,12 @@ class Search extends Component {
                                             className="form-control form-control-lg"
                                             placeholder="Song title..."
                                             name="trackTitle"
+                                            value={this.state.trackTitle}
+                                            onChange={this.onChange.bind(this)}
                                             />
                                 </div>
-                                <button className="btn btn-primary btn-lg btn-block mb-5"
-                                        type="submit"
+                                <button type="submit"
+                                        className="btn btn-primary btn-lg btn-block mb-5"
                                         >
                                         Get Track Lyrics
                                 </button>
