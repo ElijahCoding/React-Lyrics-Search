@@ -17,6 +17,21 @@ class Search extends Component {
                                 <i className="fas fa-music" /> Search For A Song
                             </h1>
                             <p className="lead text-center">Get the lyrics for any song</p>
+
+                            <form>
+                                <div className="form-group">
+                                    <input  type="text"
+                                            className="form-control form-control-lg"
+                                            placeholder="Song title..."
+                                            name="trackTitle"
+                                            />
+                                </div>
+                                <button className="btn btn-primary btn-lg btn-block mb-5"
+                                        type="submit"
+                                        >
+                                        Get Track Lyrics
+                                </button>
+                            </form>
                         </div>
                     )
                 }}
